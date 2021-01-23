@@ -1,0 +1,16 @@
+{
+  "name": "battleShip",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "#### This is intended as a development learning experience for myself. The game will be released as is. The code can be copied and altered as needed.",
+  "main": "board.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "Luc Borris",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
+}
