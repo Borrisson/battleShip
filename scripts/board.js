@@ -26,45 +26,37 @@ class Board {
 	//x, y start value in ascending order for placing ship (pick lowest value);
 
 	placeShip(x, y, direction, ship) {
-		let range, newBoard;
-		switch (direction) {
-			case "vertical":
-				range = shipRange(y, ship);
-				newBoard = this.board.map((row, index) => {
-					if (range.includes(index)) {
-						return row.map((column, index) => {
-							if (x === index) {
-								return "x";
-							} else {
-								return column;
-							}
-						});
-					} else {
-						return row;
-					}
-				});
-				break;
-			case "horizontal":
-				range = shipRange(x, ship);
-				newBoard = this.board.map((row, index) => {
-					if (y === index) {
-						return row.map((column, index) => {
-							if (range.includes(index)) {
-								return "x";
-							} else {
-								return column;
-							}
-						});
-					} else {
-						return row;
-					}
-				});
+		if (ship) {
+			let range, newBoard;
+			switch (direction) {
+				case "vertical":
+					range = shipRange(y, ship);
+					newBoard = this.board.map((row, index) => {
+						if (range.includes(index)) {
+							return row.map((column, index) => (x === index ? "x" : column));
+						} else {
+							return row;
+						}
+					});
+					break;
+				case "horizontal":
+					range = shipRange(x, ship);
+					newBoard = this.board.map((row, index) => {
+						if (y === index) {
+							return row.map((column, index) =>
+								range.includes(index) ? "x" : column
+							);
+						} else {
+							return row;
+						}
+					});
 			}
 			this.board = newBoard;
+		}
 	}
 
 	attack(x, y) {
-		if (this.ships.length !== 0) {
+		if (Object.keys(this.ships).length !== 0) {
 			const newBoard = this.board.map((row, index) => {
 				if (y === index) {
 					return row.map((column, index) => {
@@ -85,7 +77,7 @@ class Board {
 
 const newPlayer = new Board("player1");
 
-newPlayer.placeShip(4, 6, "vertical", 4);
+newPlayer.placeShip(4, 6, "horizontal", newPlayer.ships.carrier);
 
 console.log(newPlayer.board);
 
