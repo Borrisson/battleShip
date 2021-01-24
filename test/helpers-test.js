@@ -1,4 +1,3 @@
-const mocha = require("mocha");
 const assert = require("chai").assert;
 const { shipRange } = require("../scripts/helpers");
 const { describe, it } = require("mocha");
