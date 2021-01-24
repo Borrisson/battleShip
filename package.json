@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "license": "MIT",
   "description": "#### This is intended as a development learning experience for myself. The game will be released as is. The code can be copied and altered as needed.",
-  "main": "board.js",
+  "main": "express.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node ./express"
   },
   "keywords": [],
   "author": "Luc Borris",
@@ -14,6 +15,7 @@
     "mocha": "^8.2.1"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "lodash": "^4.17.20"
   }
 }
