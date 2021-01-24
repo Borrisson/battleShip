@@ -1,4 +1,4 @@
-const {shipRange} = require('./helpers');
+const { shipRange } = require("./helpers");
 
 class Board {
 	constructor(player) {
@@ -26,15 +26,27 @@ class Board {
 	//x, y start value in ascending order for placing ship (pick lowest value);
 
 	placeShip(x, y, direction, ship) {
-		let range;
+		let range, newBoard;
 		switch (direction) {
 			case "vertical":
-			range = shipRange(y, ship);
-
+				range = shipRange(y, ship);
+				newBoard = this.board.map((row, index) => {
+					if (range.includes(index)) {
+						return row.map((column, index) => {
+							if (x === index) {
+								return "x";
+							} else {
+								return column;
+							}
+						});
+					} else {
+						return row;
+					}
+				});
 				break;
 			case "horizontal":
 				range = shipRange(x, ship);
-				const newBoard = this.board.map((row, index) => {
+				newBoard = this.board.map((row, index) => {
 					if (y === index) {
 						return row.map((column, index) => {
 							if (range.includes(index)) {
@@ -47,8 +59,8 @@ class Board {
 						return row;
 					}
 				});
-				this.board = newBoard;
-		}
+			}
+			this.board = newBoard;
 	}
 
 	attack(x, y) {
@@ -73,7 +85,7 @@ class Board {
 
 const newPlayer = new Board("player1");
 
-newPlayer.placeShip(4, 6, "horizontal", 4);
+newPlayer.placeShip(4, 6, "vertical", 4);
 
 console.log(newPlayer.board);
 
