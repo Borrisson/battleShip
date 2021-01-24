@@ -1,15 +1,9 @@
 const { shipRange } = require("./helpers");
+const Player = require('./player');
 
 class Board {
-	constructor(player) {
-		this.player = player;
-		this.ships = {
-			carrier: 5,
-			battleship: 4,
-			cruiser: 3,
-			submarine: 3,
-			destroyer: 2,
-		};
+	constructor(name) {
+		this.player = new Player(name);
 		this.board = [
 			[null, null, null, null, null, null, null, null, null, null],
 			[null, null, null, null, null, null, null, null, null, null],
@@ -23,6 +17,7 @@ class Board {
 			[null, null, null, null, null, null, null, null, null, null],
 		];
 	}
+	
 	//x, y start value in ascending order for placing ship (pick lowest value);
 
 	placeShip(x, y, direction, ship) {
@@ -57,7 +52,7 @@ class Board {
 	}
 
 	attack(x, y) {
-		if (Object.keys(this.ships).length !== 0) {
+		if (Object.keys(this.player.ships).length !== 0) {
 			const newBoard = this.board.map((row, index) => {
 				if (y === index) {
 					return row.map((column, index) => {
@@ -78,7 +73,7 @@ class Board {
 
 const newPlayer = new Board("player1");
 
-newPlayer.placeShip(6, 6, "horizontal", newPlayer.ships.carrier);
+newPlayer.placeShip(6, 6, "horizontal", 4);
 
 console.log(newPlayer.board);
 
