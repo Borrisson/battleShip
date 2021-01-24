@@ -2,7 +2,11 @@ const _ = require("lodash");
 
 const shipRange = (firstTile, ship) => {
 	const length = firstTile + ship;
-	return _.range(firstTile, length);
+	if (length > 9) {
+		return null;
+	} else {
+		return _.range(firstTile, length);
+	}
 };
 
 module.exports = { shipRange };
