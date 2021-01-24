@@ -11,16 +11,16 @@ class Board {
 			destroyer: 2,
 		};
 		this.board = [
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
-			[null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
+			[null, null, null, null, null, null, null, null, null, null],
 		];
 	}
 	//x, y start value in ascending order for placing ship (pick lowest value);
