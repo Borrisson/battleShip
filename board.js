@@ -1,3 +1,6 @@
+const _ = require('lodash');
+
+
 class Board {
 	constructor(player) {
 		this.player = player;
