@@ -1,5 +1,4 @@
-const _ = require("lodash");
-
+const {shipRange} = require('./helpers');
 
 class Board {
 	constructor(player) {
@@ -27,18 +26,17 @@ class Board {
 	//x, y start value in ascending order for placing ship (pick lowest value);
 
 	placeShip(x, y, direction, ship) {
+		let range;
 		switch (direction) {
 			case "vertical":
-			const range =
+			range = shipRange(y, ship);
 
 				break;
 			case "horizontal":
-				const x2 = x + length;
-				const range = _.range(x, x2);
+				range = shipRange(x, ship);
 				const newBoard = this.board.map((row, index) => {
 					if (y === index) {
 						return row.map((column, index) => {
-							console.log(range.includes(index));
 							if (range.includes(index)) {
 								return "x";
 							} else {
