@@ -1,5 +1,7 @@
 const { shipRange } = require("./helpers");
-const Player = require('./player');
+const Player = require("./player");
+
+//I could add another property to keep track of the respctive ships with an array of coodinates, once ship is sunk it tells you which ship sunk.
 
 class Board {
 	constructor(name) {
@@ -17,37 +19,45 @@ class Board {
 			[null, null, null, null, null, null, null, null, null, null],
 		];
 	}
-	
+
 	//x, y start value in ascending order for placing ship (pick lowest value);
 
 	placeShip(x, y, direction, ship) {
-		const rangeY = shipRange(y, ship);
-		const rangeX = shipRange(x, ship);
+		const shipLength = this.player.ships[ship];
+		const rangeY = shipRange(y, shipLength);
+		const rangeX = shipRange(x, shipLength);
 		let newBoard;
+		delete this.player.ships[ship];
 
-		if (ship && rangeY && rangeX) {
-			switch (direction) {
-				case "vertical":
-					newBoard = this.board.map((row, index) => {
-						if (rangeY.includes(index)) {
-							return row.map((column, index) => (x === index ? "x" : column));
-						} else {
-							return row;
-						}
-					});
-					break;
-				case "horizontal":
-					newBoard = this.board.map((row, index) => {
-						if (y === index) {
-							return row.map((column, index) =>
-								rangeX.includes(index) ? "x" : column
-							);
-						} else {
-							return row;
-						}
-					});
+		try {
+			if (ship && (rangeY || rangeX)) {
+				switch (direction) {
+					case "vertical":
+						newBoard = this.board.map((row, index) => {
+							if (rangeY.includes(index)) {
+								return row.map((column, index) => (x === index ? "x" : column));
+							} else {
+								return row;
+							}
+						});
+						break;
+					case "horizontal":
+						newBoard = this.board.map((row, index) => {
+							if (y === index) {
+								return row.map((column, index) =>
+									rangeX.includes(index) ? "x" : column
+								);
+							} else {
+								return row;
+							}
+						});
+				}
+				this.board = newBoard;
 			}
-			this.board = newBoard;
+		} catch (e) {
+			this.player.ships[ship] = shipLength;
+			const error = new Error(e);
+			console.log(`${error.name}: ${error.message}`);
 		}
 	}
 
@@ -73,7 +83,7 @@ class Board {
 
 const newPlayer = new Board("player1");
 
-newPlayer.placeShip(6, 6, "horizontal", 4);
+newPlayer.placeShip(4, 6, "horizontal", "carrier");
 
 console.log(newPlayer.board);
 
