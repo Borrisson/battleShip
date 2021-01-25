@@ -1,9 +1,9 @@
 const Ships = require('./ships');
 
-class Player {
+class Player extends Ships {
 	constructor(name) {
+    super();
     this.name = name;
-    this.ships = new Ships;
 	}
 }
 
