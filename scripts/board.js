@@ -3,9 +3,9 @@ const Player = require("./player");
 
 //I could add another property to keep track of the respctive ships with an array of coodinates, once ship is sunk it tells you which ship sunk.
 
-class Board {
+class Board extends Player {
 	constructor(name) {
-		this.player = new Player(name);
+		super(name);
 		this.board = [
 			[null, null, null, null, null, null, null, null, null, null],
 			[null, null, null, null, null, null, null, null, null, null],
@@ -23,11 +23,11 @@ class Board {
 	//x, y start value in ascending order for placing ship (pick lowest value);
 
 	placeShip(x, y, direction, ship) {
-		const shipLength = this.player.ships[ship];
+		const shipLength = this.ships[ship];
 		const rangeY = shipRange(y, shipLength);
 		const rangeX = shipRange(x, shipLength);
 		let newBoard;
-		delete this.player.ships[ship];
+		delete this.ships[ship];
 
 		try {
 			if (ship && (rangeY || rangeX)) {
@@ -55,14 +55,14 @@ class Board {
 				this.board = newBoard;
 			}
 		} catch (e) {
-			this.player.ships[ship] = shipLength;
+			this.ships[ship] = shipLength;
 			const error = new Error(e);
 			console.log(`${error.name}: ${error.message}`);
 		}
 	}
 
 	attack(x, y) {
-		if (Object.keys(this.player.ships).length !== 0) {
+		if (Object.keys(this.ships).length !== 0) {
 			const newBoard = this.board.map((row, index) => {
 				if (y === index) {
 					return row.map((column, index) => {
@@ -85,7 +85,7 @@ const newPlayer = new Board("player1");
 
 newPlayer.placeShip(4, 6, "horizontal", "carrier");
 
-console.log(newPlayer.board);
+console.log(newPlayer);
 
 newPlayer.attack(4, 6);
 console.log(newPlayer.board);
