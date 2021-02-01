@@ -20,6 +20,8 @@ class Board extends Player {
 		];
 	}
 
+	
+
 	//x, y start value in ascending order for placing ship (pick lowest value);
 
 	placeShip(x, y, direction, ship) {
@@ -80,12 +82,3 @@ class Board extends Player {
 		}
 	}
 }
-
-const newPlayer = new Board("player1");
-
-newPlayer.placeShip(4, 6, "horizontal", "carrier");
-
-console.log(newPlayer);
-
-newPlayer.attack(4, 6);
-console.log(newPlayer.board);
